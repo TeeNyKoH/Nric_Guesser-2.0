@@ -1,5 +1,8 @@
 import math
 from bisect import bisect_left
+import PySimpleGUI as sg
+
+
 
 yearDict = {2021: 38672, 2020: 38590, 2019: 39279, 2018: 39039, 2017: 39615, 2016: 41251, 2015: 42185, 2014: 42232,
             2013: 39720, 2012: 42663, 2011: 39654, 2010: 37967, 2009: 39570, 2008: 39826, 2007: 39490, 2006: 38317,
@@ -220,23 +223,65 @@ def getNric(year , last4 , position):
         letter = "T"
 
     nric = letter + str(year[2]) + str(year[3]) + str(position)[:2] + str(last4)
-    return print("My best guess of your Nric is: " , nric)
+    #original to return print statement
+    # return print("My best guess of your Nric is: " , nric)
+    return nric
 
-    
 
-month = getMonth()
-year = getYear()
-last4 = getLast4()
-totalBirths = getTotalBirth(year)
-yearSplit = splitYear(year)
-weight = calWeight(yearSplit , last4 )
-remainder = calWeightLetter(yearSplit , last4)
-potCorrectAns = getPotentialCorrectAnswers(weight , remainder) #this is the list that gives all the potential correct answers
-position = chooseNearestAns(last4 , totalBirths , month , potCorrectAns)
-NRIC = getNric(yearSplit , last4, position)
+#original function call    
+# month = getMonth()
+# year = getYear()
+# last4 = getLast4()
+# totalBirths = getTotalBirth(year)
+# yearSplit = splitYear(year)
+# weight = calWeight(yearSplit , last4 )
+# remainder = calWeightLetter(yearSplit , last4)
+# potCorrectAns = getPotentialCorrectAnswers(weight , remainder) #this is the list that gives all the potential correct answers
+# position = chooseNearestAns(last4 , totalBirths , month , potCorrectAns)
+# NRIC = getNric(yearSplit , last4, position)
+#original function call end
 
 # print(month , yearSplit[2],yearSplit[3] , last4 , totalBirths , weight)
 # print("tlist1" , potCorrectAns)
 # print("Position" , position)
 
 # print("Your Nric is ")
+
+
+sg.theme('Dark Blue 1')   # Add a touch of color
+# All the stuff inside your window.
+layout = [  [sg.Text('Nric Guesser', font = ("Constantia", 30),text_color='orange' )],
+            [sg.Text('Birth Month (E.g Feb = 02 and Dec = 12):', font = ("Cascadia Code", 18)), sg.InputText()],
+            [sg.Text('Birth Year (E.g 1989)                  :', font = ("Cascadia Code", 18)), sg.InputText()],
+            [sg.Text('Last 4 Digits of NRIC (E.g 321A)       :', font = ("Cascadia Code", 18)), sg.InputText()],
+            [sg.Button('Submit' , font = ("Cascadia Code", 20)), sg.Button('Cancel', font = ("Cascadia Code", 20))],
+            [sg.Text('Created By Tennyson | No data will be stored, all algorithms are calculated locally.', text_color='White',font = ("Cascadia Code" ,8))] ]
+
+# Create the Window
+window = sg.Window('Nric Guesser', layout)
+# Event Loop to process "events" and get the "values" of the inputs
+while True:
+    event, values = window.read()
+    if event == sg.WIN_CLOSED or event == 'Cancel': # if user closes window or clicks cancel
+        break
+    print('You entered ', values[0])
+    print('You entered ', values[1])
+    print('You entered ', values[2])
+    month =  int(values[0])
+    year = int(values[1])
+    last4 = values[2]
+    totalBirths = getTotalBirth(year)
+    yearSplit = splitYear(year)
+    weight = calWeight(yearSplit , last4 )
+    remainder = calWeightLetter(yearSplit , last4)
+    potCorrectAns = getPotentialCorrectAnswers(weight , remainder) #this is the list that gives all the potential correct answers
+    position = chooseNearestAns(last4 , totalBirths , month , potCorrectAns)
+    NRIC = getNric(yearSplit , last4, position)
+    print(NRIC)
+    sg.Print("My Best Guess Is :" , NRIC, font = ("Cascadia Code", 25))
+
+
+
+
+
+window.close()
