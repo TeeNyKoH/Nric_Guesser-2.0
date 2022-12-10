@@ -4,10 +4,10 @@ Created By Tennyson Koh
 
 Run python code and UI will be shown as such
 
-![image](https://user-images.githubusercontent.com/25479231/206857490-af525b90-8803-4a50-8cea-556fa8a530eb.png)
+![image](https://user-images.githubusercontent.com/25479231/206857583-8cbe13e5-3918-4cd0-bfe8-d3f6cf98369d.png)
 
 Enter Details and click Submit
-![image](https://user-images.githubusercontent.com/25479231/206857500-d26e5ca2-9d75-4bfc-a89a-2b0623f89305.png)
+![image](https://user-images.githubusercontent.com/25479231/206857589-f6eaf172-93ad-40f8-bdd0-489f6b5f7e26.png)
 Nric will be shown!
 
 No data is collected as all algorithm is calculated locally.
