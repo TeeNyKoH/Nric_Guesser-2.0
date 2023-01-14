@@ -1,6 +1,6 @@
 # Nric_Guesser-2.0
-A Python code to guess ur Nric
-Created By Tennyson Koh
+A Python code to guess ur Nric <br>
+Created By me.
 
 Run python code and UI will be shown as such
 
